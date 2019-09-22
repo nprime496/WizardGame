@@ -1,0 +1,3 @@
+tous les caractères auront un fichier de description
+contenant leur noms, niveau de vie et surtout
+les capacités qu'ils possedent.
