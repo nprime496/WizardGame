@@ -85,7 +85,10 @@ class Character(object):
             P=-PAS#the sign of deplacement change
         self.direction=direction#the direction of the character changes
         self.index+=1
-        self.pos=(self.pos[0]+self.speed*P,self.pos[1])#he character moves
+
+        tmp=(self.pos[0]+self.speed*P,self.pos[1])#he character moves
+        if not (tmp[0]>=WIDTH-50 or tmp[0]<-30):
+            self.pos=tmp
         if self.index>TAMPON*ANIM-1:
             self.index=0
         self.sayDialogue(self.comment_animations[WALK],window)

@@ -3,7 +3,9 @@ I've just finished reading Harry Potter...seven Books, more than 03 months of in
 
 ## Description
 
-This is a simplistic two players game. It is very basic and not quite finished, but is interesting enough to get an eye.
+This is a simplistic two players game. It is very basic and not quite finished, but is interesting enough to get an eye on it.
+
+The background and the players change each time you launch the game.
 
 ![wizard+game+1](https://user-images.githubusercontent.com/54849528/80698438-62963d80-8ad2-11ea-9804-4051a73f0897.png)
 
