@@ -4,7 +4,7 @@ from setuptools import find_packages
 import os 
 
 folder = os.path.dirname(os.path.realpath(__file__))
-requirementPath = os.path.join(folder,'/requirements.txt')
+requirementPath = os.path.join(folder,'requirements.txt')
 
 install_requires = [] # Here we'll get: ["gunicorn", "docutils>=0.3", "lxml==0.5a7"]
 if os.path.isfile(requirementPath):
