@@ -38,6 +38,7 @@ The background and the players change each time you launch the game.
 ## TODO
 
 * Add some defense
-* Complete making of all characters
-* make it more playable
+* add more projectiles
+* add random bonuses
+* add jumps 
 * add sounds effects
