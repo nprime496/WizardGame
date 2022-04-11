@@ -4,8 +4,7 @@ import os
 from projectile import *
 import sys
 
-#list of all the spells
-#spells=[Spell(name="coldfire//",incantation="Expelliamus!")]
+
 class Character(object):
     def __init__(self,image_path,dim,keystrokes=None,speed=1,life=100):
 
@@ -30,30 +29,28 @@ class Character(object):
                 except Exception as e:
                     print(e,file=sys.stderr)
             self.animations.append(tmp)                
+        
         self.direction=True#right
         self.action=DONOTHTING#the character is lazy so he does nothing by default
         self.index=0
-        #all the movements are stored there
-        #self.animations=[self.walking,self.donothing,self.perform,self.hit,self.die]#,self.die]#,self.perform,self.walking,self.die]
         self.comment_animations=["  ","...","attack","fabulous!","arrrgh!!"]
         self.image=self.animations[self.action][self.index]
         self.pos=(30,LENGTH-dim-70)
         self.time=0#useful to do the special move after a certain time
         self.rect=self.image.get_rect()
         self.myAttack=True#it's not really an attack,it's just there to be different from "None" 
-        #print(self.image.get_rect())
-        #self.menu=[(self.keystrokes[2],self.walk(True)),(self.keystrokes[3],self.walk(False)),(self.keystrokes[4],self.at)]
+    
     def dying(self,window):
-        #print("I'm dying")
         self.index+=1
-        #print(len(self.die))
         if self.index<(TAMPON*3)*ANIM-1:
             try:
                 self.sayDialogue(self.comment_animations[DIE],window)
                 self.image=pygame.transform.flip(self.animations[DIE][self.index//(TAMPON*3)],not self.direction,False)#the character changes orientation if necessary
             except Exception as e:
                 print(e,file=sys.stderr)
-            #self.action=DIE        
+    
+
+
     def attack(self,attack):
         self.time=0
         self.index+=1
@@ -78,6 +75,8 @@ class Character(object):
             self.image=pygame.transform.flip(self.animations[DONOTHTING][self.index//(TAMPON*4)],not self.direction,False)
         elif self.action!=PERFORM and self.action!=HIT:
             self.action=DONOTHTING#else,he does nothing
+    
+
     def walk(self,direction,window):
         P=PAS
         self.time=0
@@ -95,6 +94,7 @@ class Character(object):
         self.image=pygame.transform.flip(self.animations[WALK][self.index//TAMPON],not self.direction,False)#the character changes orientation if necessary
         self.action=WALK#it walks
         
+    
     def movement(self):
         self.index+=1
         if self.index<(TAMPON*5)*ANIM-1:
@@ -103,16 +103,19 @@ class Character(object):
         else:
             self.time=0
             self.action=DONOTHTING
+    
     def draw(self,screen):
         self.rect=pygame.Rect((self.pos,(self.dim,self.dim)))
         #self.image.move(self.image,self.pos)
         screen.blit(self.image,self.pos)
+    
     def manage_attacks(self,keystrokes,window):
         if keystrokes[self.keystrokes[4]]:
             if self.action!=PERFORM:
                 self.index=0
                 self.action=PERFORM
                 self.myAttack=True#Spell(self,name="coldfire//",incantation="Expelliamus!")
+    
     def update(self,keystrokes,window):
         sp=None#possible spell
         if self.action!=DIE:
@@ -159,21 +162,22 @@ class Character(object):
         #print(self.rect)
         window.blit(text,(self.rect[0],self.rect[1]-25))
         pass        
+
 #definition of herited classes    
 class Goblin(Character):
     """
         Incredibly dumb but powerful
     """
-    def __init__(self,image_path,dim=100,keystrokes=None,speed=1.5,life=200):
-        Character.__init__(self,image_path,dim,keystrokes,speed,life)
+    def __init__(self,dim=100,keystrokes=None,speed=1.5,life=200):
+        Character.__init__(self,"goblin",dim,keystrokes,speed,life)
         self.comment_animations=["  ","...","ARGH!!","AAARGHH","AGRRRRH!!"]
+
 class Orc(Character):
     """
         mysterious as f*ck
     """
-    def __init__(self,image_path,dim=80,keystrokes=None):
-        Character.__init__(self,image_path,dim,keystrokes)
-        print("ORC: ",image_path)
+    def __init__(self,dim=80,keystrokes=None):
+        Character.__init__(self,"orc",dim,keystrokes)
         self.comment_animations=["  ","*sssss*","!hiss!","*sssss*","..."]
 
 
@@ -181,24 +185,26 @@ class Knight(Character):
     """
         Just give him a castle to protect
     """
-    def __init__(self,image_path,dim=80,keystrokes=None):
-        Character.__init__(self,image_path,dim,keystrokes)
+    def __init__(self,dim=80,keystrokes=None):
+        Character.__init__(self,"knight",dim,keystrokes)
         self.comment_animations=["  ","...","En garde!","Pour le roi!","Oh! Je me meurs!!"]
+
 class Hunter(Character):
     """
         a forest, and he will be happy
     """
-    def __init__(self,image_path,dim=80,keystrokes=None):
-        Character.__init__(self,image_path,dim,keystrokes)
+    def __init__(self,dim=80,keystrokes=None):
+        Character.__init__(self,"hunter",dim,keystrokes)
         self.comment_animations=["  ","...","In your eye!!","What a shoot!","Arrrgh!!"]
     def nothing(self,t=200):
         Character.nothing(self,t)
+
 class Wizard(Character):
     """
         avada kedavra
     """
-    def __init__(self,image_path,dim=75,keystrokes=None,life=80):
-        Character.__init__(self,image_path,dim,keystrokes)
+    def __init__(self,dim=75,keystrokes=None,life=80):
+        Character.__init__(self,"wizard",dim,keystrokes)
         self.myAttack=None
         self.comment_animations=["  ","...","Expelliarmus!!","Magic is might","Arrrgh!!"]
     def nothing(self,t=400):

@@ -12,7 +12,6 @@ from projectile import *
 from character import *
 from utils import *
 import random
-#from math import abs
 
 #datas used in the program below
 compteur=0
@@ -51,17 +50,14 @@ def afficher(window,character):
 def main():
     player2_keys=[pygame.K_UP,pygame.K_DOWN,pygame.K_d,pygame.K_a,pygame.K_s]
     player1_keys=[pygame.K_UP,pygame.K_DOWN,pygame.K_RIGHT,pygame.K_LEFT,pygame.K_SPACE]
-    #player1_keys=[pygame.K_UP,pygame.K_DOWN,pygame.K_l,pygame.K_j,pygame.K_k]
+    
     #screen    
     window=pygame.display.set_mode((WIDTH,LENGTH))
     pygame.display.set_caption("Wizard Fight 496")#title of the game... don't blame me, I was kinda in hurry
     backgound=pygame.image.load(os.path.join("backgrounds",f"{random.randint(1,6)}.jpg")).convert()#the backgrounds are named like 1.png,2.png,...6.png in backgrounds directory
     backgound=pygame.transform.scale(backgound,(WIDTH,LENGTH))#the background is scaled to the size of the screen
-    #cld=Spell()
-    #Character("wizard")
-    #Wizard("wizard")
-    #Goblin("goblin")
-    all_characters=[Goblin("goblin"),Wizard("wizard"),Hunter("hunter"),Orc("orc"),Knight("knight")]#this list contains all the characters on the screen
+    
+    all_characters=[Goblin(),Wizard(),Hunter(),Orc(),Knight()]#this list contains all the characters on the screen
     
     player1=random.choice(all_characters).setKeystrokes(player1_keys)
     all_characters.remove(player1)
