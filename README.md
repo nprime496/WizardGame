@@ -35,3 +35,9 @@ The background and the players change each time you launch the game.
   * `RIGHT` for moving right
   * `SPACE` for firing/attacking
 
+## TODO
+
+* Add some defense
+* Complete making of all characters
+* make it more playable
+* add sounds effects
