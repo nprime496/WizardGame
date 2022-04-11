@@ -9,6 +9,8 @@ pygame.mixer.music.load(os.path.join("theme","theme.mp3"))
 pygame.mixer.music.play(-1)
 pygame.mixer.stop()
 
+pygame_icon = pygame.image.load('ressources/icon.jpg')
+pygame.display.set_icon(pygame_icon)
 
 WALK=0
 DONOTHTING=1
